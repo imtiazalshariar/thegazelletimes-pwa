@@ -24,20 +24,20 @@ export default async function Home() {
             alt=""
             width={1080}
             height={600}
-            className="w-full h-80 object-cover rounded-md mb-5"
+            className="w-full h-screen-3/4 lg:h-80 object-cover rounded-md mb-5"
           />
-          <div className="bg-[#00000066] flex flex-col justify-between absolute  rounded-md text-white top-0 left-0 right-0 bottom-0 p-5">
+          <div className="bg-[#000000bd] flex flex-col justify-between absolute  rounded-md text-white top-0 left-0 right-0 bottom-0 p-5">
             <span className="capitalize">
               {moment(posts.data[0].attributes.createdAt)
                 .startOf("hour")
                 .fromNow()}
             </span>
-            <div>
+            <div className="mt-20">
               <p>#{posts.data[0].attributes.category.data.attributes.name}</p>
-              <h1 className="text-4xl my-2">
+              <h1 className="text-2xl lg:text-4xl my-2">
                 {posts.data[0].attributes.title}
               </h1>
-              <p>
+              <p className="text-sm lg:text-lg">
                 {posts.data[0].attributes.description.replace(
                   /(.{250})..+/,
                   "$1…"
