@@ -1,5 +1,7 @@
+import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
+import Markdown from "markdown-to-jsx";
 
 export default async function Page({ params }: { params: { post: string } }) {
   const id = params.post.split("-").slice(-1)[0];
@@ -29,11 +31,17 @@ export default async function Page({ params }: { params: { post: string } }) {
               {post.data.attributes.author.data.attributes.fullName}
             </Link>{" "}
           </li>
-          <li>On {post.data.attributes.createdAt}</li>
+          <li>
+            On{" "}
+            {moment(post.data.attributes.createdAt).format(
+              "MMMM Do YYYY, h:mm a"
+            )}
+          </li>
         </ul>
       </div>
       <h1 className="text-6xl">{post.data.attributes.title}</h1>
       <p className="my-4">{post.data.attributes.description}</p>
+      <Markdown className="content">{post.data.attributes.content}</Markdown>
     </div>
   );
 }

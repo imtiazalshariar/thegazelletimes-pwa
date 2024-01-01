@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Card from "./components/Card";
 import Link from "next/link";
+import moment from "moment";
 
 export default async function Home() {
   const postsResponse = await fetch(
@@ -25,15 +26,24 @@ export default async function Home() {
             height={600}
             className="w-full h-80 object-cover rounded-md mb-5"
           />
-          <div className="bg-[#00000066] flex flex-col justify-end absolute  rounded-md text-white top-0 left-0 right-0 bottom-0 p-5">
-            <p>// {posts.data[0].attributes.category.data.attributes.name}</p>
-            <h1 className="text-4xl my-2">{posts.data[0].attributes.title}</h1>
-            <p>
-              {posts.data[0].attributes.description.replace(
-                /(.{250})..+/,
-                "$1…"
-              )}
-            </p>
+          <div className="bg-[#00000066] flex flex-col justify-between absolute  rounded-md text-white top-0 left-0 right-0 bottom-0 p-5">
+            <span className="capitalize">
+              {moment(posts.data[0].attributes.createdAt)
+                .startOf("hour")
+                .fromNow()}
+            </span>
+            <div>
+              <p>#{posts.data[0].attributes.category.data.attributes.name}</p>
+              <h1 className="text-4xl my-2">
+                {posts.data[0].attributes.title}
+              </h1>
+              <p>
+                {posts.data[0].attributes.description.replace(
+                  /(.{250})..+/,
+                  "$1…"
+                )}
+              </p>
+            </div>
           </div>
         </Link>
       </div>

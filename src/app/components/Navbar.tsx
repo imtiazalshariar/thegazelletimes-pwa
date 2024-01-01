@@ -54,7 +54,7 @@ export default function Navbar() {
         </ul>
       </div>
       <div className="navbar-center">
-        <Link href={"/"} className="btn btn-ghost text-xl">
+        <Link href={"/"} className="text-xl">
           The Gazelle Times
         </Link>
       </div>
