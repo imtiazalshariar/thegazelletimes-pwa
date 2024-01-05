@@ -2,6 +2,7 @@ import Image from "next/image";
 import Card from "./components/Card";
 import Link from "next/link";
 import moment from "moment";
+import FlashGroup from "./components/FlashGroup";
 
 export default async function Home() {
   const postsResponse = await fetch(
@@ -12,32 +13,41 @@ export default async function Home() {
   );
   const posts = await postsResponse.json();
 
+  const flashResponse = await fetch(
+    "https://admin.thegazelletimes.com/api/flash-news?populate=*&sort[0]=createdAt:desc",
+    {
+      cache: "no-store",
+    }
+  );
+
+  const flashNews = await flashResponse.json();
+
   return (
     <div className="mb-10">
-      <div className="mb-20 mt-5">
+      <div className="mb-10 flex flex-wrap gap-3">
         <Link
           href={`/posts/${posts.data[0].attributes.slug}-${posts.data[0].id}`}
-          className="relative rounded-md"
+          className="relative rounded-md flex-1"
         >
           <Image
             src={`https://admin.thegazelletimes.com${posts.data[0].attributes.banner.data.attributes.url}`}
             alt=""
             width={1080}
             height={600}
-            className="w-full h-screen-3/4 lg:h-80 object-cover rounded-md mb-5"
+            className="w-full h-screen lg:h-96 2xl:h-screen- object-cover rounded-md"
           />
-          <div className="bg-[#000000bd] flex flex-col justify-between absolute  rounded-md text-white top-0 left-0 right-0 bottom-0 p-5">
+          <div className="bg-[#000000bd] flex flex-col justify-between absolute  rounded-md text-white top-0 left-0 right-0 bottom-0 p-5 2xl:p-20">
             <span className="capitalize">
               {moment(posts.data[0].attributes.createdAt)
                 .startOf("hour")
                 .fromNow()}
             </span>
-            <div className="mt-20">
+            <div className="lg:mt-20">
               <p>#{posts.data[0].attributes.category.data.attributes.name}</p>
-              <h1 className="text-2xl lg:text-4xl my-2">
+              <h1 className="text-2xl lg:text-4xl 2xl:text-7xl my-2">
                 {posts.data[0].attributes.title}
               </h1>
-              <p className="text-sm lg:text-lg">
+              <p className="text-sm lg:text-lg 2xl:text-3xl">
                 {posts.data[0].attributes.description.replace(
                   /(.{250})..+/,
                   "$1…"
@@ -46,6 +56,13 @@ export default async function Home() {
             </div>
           </div>
         </Link>
+        <div className="w-full lg:w-1/3 py-10 lg:py-0">
+          <div className="mb-1">
+            <h2 className="text-lg font-bold m-0 p-0">News Flash</h2>
+            <p className="m-0 p-0">Today&apos;s Breaking News</p>
+          </div>
+          <FlashGroup data={flashNews.data} />
+        </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {posts.data.slice(1, -1).map((post: any, index: number) => {

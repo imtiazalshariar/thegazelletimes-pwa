@@ -17,13 +17,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html data-theme="light" lang="en">
+    <html lang="en">
       <body className={inter.className}>
         <div className="container mx-auto px-5">
           <Navbar />
           {children}
         </div>
-        <footer className="footer footer-center p-4 bg-slate-900 text-white text-base-content">
+        <footer className="footer footer-center p-4 bg-slate-900 text-white">
           <aside>
             <p>Copyright © 2024 - All right reserved by Gazelle Digital</p>
           </aside>
