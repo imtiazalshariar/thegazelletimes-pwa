@@ -3,6 +3,7 @@ interface FlashProps {
   id: string;
   onClick?: () => void;
   type: string;
+  location: string;
 }
 
 export default function Flash(props: FlashProps) {
@@ -29,10 +30,15 @@ export default function Flash(props: FlashProps) {
         "w-full drop-shadow-lg h-full cursor-pointer select-none p-5 text-white rounded-lg transition-all flex flex-col justify-between gap-5"
       }
     >
-      <h2 className="text-3xl lg:text-3xl xl:text-4xl 2xl:text-4xl font-bold">
-        {props.title}
-      </h2>
-      {props.type}
+      <div>
+        <p>
+          <small>{props.location}</small>
+        </p>
+        <h2 className="text-3xl lg:text-3xl xl:text-4xl 2xl:text-4xl font-bold">
+          {props.title}
+        </h2>
+      </div>
+      <p> {props.type}</p>
     </div>
   );
 }

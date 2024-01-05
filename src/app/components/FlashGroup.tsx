@@ -28,6 +28,7 @@ export default function FlashGroup(props: any) {
             key={item.id}
             title={item.attributes.incident}
             type={item.attributes.type}
+            location={item.attributes.location}
           />
         ))}
       </div>
