@@ -31,14 +31,21 @@ export default async function Page({ params }: { params: { author: string } }) {
     <div>
       <div className="my-10 flex flex-col lg:flex-row gap-5">
         <div>
-          <Image
-            height={300}
-            width={300}
-            alt={author.fullName}
-            title={author.fullName}
-            className="w-64 h-64 object-cover mb-5 rounded-lg"
-            src={`https://admin.thegazelletimes.com${author.profile_pic.url}`}
-          />
+          {author.profile_pic ? (
+            <Image
+              height={300}
+              width={300}
+              alt={author.fullName}
+              title={author.fullName}
+              className="w-64 h-64 object-cover mb-5 rounded-lg"
+              src={`https://admin.thegazelletimes.com${author.profile_pic.url}`}
+            />
+          ) : (
+            <div className="w-64 h-64 flex items-center justify-center text-center object-cover mb-5 rounded-lg bg-gray-900 text-gray-400">
+              &gt;_&lt; <br />
+              no profile pic
+            </div>
+          )}
           <h1 className="text-3xl">{author.fullName}</h1>
           <p>@{username}</p>
         </div>
