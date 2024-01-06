@@ -27,7 +27,10 @@ export default async function Page({ params }: { params: { post: string } }) {
         <ul className="flex gap-3">
           <li>
             By{" "}
-            <Link className="link link-primary" href={"/"}>
+            <Link
+              className="link link-primary"
+              href={`/authors/${post.data.attributes.author.data.attributes.username}-${post.data.attributes.author.data.id}`}
+            >
               {post.data.attributes.author.data.attributes.fullName}
             </Link>{" "}
           </li>
@@ -39,7 +42,7 @@ export default async function Page({ params }: { params: { post: string } }) {
           </li>
         </ul>
       </div>
-      <h1 className="text-6xl">{post.data.attributes.title}</h1>
+      <h1 className="text-6xl mt-2 p-0">{post.data.attributes.title}</h1>
       <p className="my-4">{post.data.attributes.description}</p>
       <Markdown className="content">{post.data.attributes.content}</Markdown>
     </div>
