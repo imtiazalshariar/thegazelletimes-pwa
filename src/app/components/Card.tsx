@@ -14,7 +14,7 @@ export default function Card(props: any) {
           height={200}
           width={1000}
           alt=""
-          className="object-cover h-80 w-full"
+          className="object-cover h-52 w-full"
         />
         {/* <img
           src={props.banner}

@@ -31,14 +31,14 @@ export default function Flash(props: FlashProps) {
       }
     >
       <div>
-        <p>
+        <p className="2xl:text-4xl">
           <small>{props.location}</small>
         </p>
-        <h2 className="text-3xl lg:text-3xl xl:text-4xl 2xl:text-4xl font-bold">
+        <h2 className="text-3xl md:text-6xl lg:text-3xl xl:text-4xl 2xl:text-7xl font-bold">
           {props.title}
         </h2>
       </div>
-      <p> {props.type}</p>
+      <p className="2xl:text-4xl capitalize"> {props.type}</p>
     </div>
   );
 }

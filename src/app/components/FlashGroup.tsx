@@ -4,10 +4,23 @@ import Flash from "./Flash";
 
 export default function FlashGroup(props: any) {
   const [data, setData] = useState<any[]>([]);
+  const [interacting, setInteractingState] = useState(false);
 
   useEffect(() => {
     setData(props.data);
   }, []);
+
+  useEffect(() => {
+    if (data.length > 0) {
+      const interval = setInterval(() => {
+        if (!interacting) {
+          shiftCardSequence();
+        }
+      }, 2000);
+
+      return () => clearInterval(interval);
+    }
+  }, [data, interacting]);
 
   const shiftCardSequence = () => {
     if (data.length > 0) {
@@ -19,7 +32,7 @@ export default function FlashGroup(props: any) {
   };
 
   return (
-    <div className="w-full h-80 lg:h-auto rounded-lg">
+    <div className="w-full h-80 md:h-auto lg:flex-1 rounded-lg">
       <div className="stack h-full w-full">
         {data.map((item: any, index: number) => (
           <Flash
