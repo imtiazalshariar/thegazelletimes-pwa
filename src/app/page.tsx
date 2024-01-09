@@ -3,6 +3,7 @@ import Card from "./components/Card";
 import Link from "next/link";
 import moment from "moment";
 import FlashGroup from "./components/FlashGroup";
+import ImmersiveAd from "./components/ImmersiveAd";
 
 export default async function Home() {
   const postsResponse = await fetch(
@@ -70,7 +71,24 @@ export default async function Home() {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
-        <div className="lg:col-span-2 2xl:col-span-3 row-span-1 bg-white p-1 rounded-md"></div>
+        <div className="lg:col-span-2 2xl:col-span-3 row-span-1 bg-white p-1 rounded-md relative">
+          <ImmersiveAd />
+          <span
+            title="Ads are a way of supporting our work"
+            className="select-none font-bold absolute bg-gray-300 text-white top-5 right-5 px-2 py-1 rounded-xl text-xs"
+          >
+            immersive Ad
+          </span>
+          <div className="absolute bottom-5 right-1/2 translate-x-1/2">
+            <a
+              className="btn rounded-full px-10"
+              target="_blank"
+              href="http://www.tingeworks.com?rf=thegazelletimes"
+            >
+              Learn more
+            </a>
+          </div>
+        </div>
 
         {posts.data.slice(1, -1).map((post: any, index: number) => {
           return (
@@ -78,7 +96,7 @@ export default async function Home() {
               key={post.id}
               title={post.attributes.title}
               description={post.attributes.description.replace(
-                /(.{100})..+/,
+                /(.{50})..+/,
                 "$1…"
               )}
               slug={`${post.attributes.slug}-${post.id}`}

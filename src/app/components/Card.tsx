@@ -27,7 +27,7 @@ export default function Card(props: any) {
         <h2 className={`card-title ${props.feature ? "lg:text-6xl" : ""}`}>
           {props.title}
         </h2>
-        <p className={` ${props.feature ? "lg:text-3xl" : ""}`}>
+        <p className={` ${props.feature ? "lg:text-2xl" : ""}`}>
           {props.description}
         </p>
       </div>
